@@ -17,11 +17,20 @@ class AllTickets extends StatelessWidget {
             child: Column(
               children: ticketList
                   .map(
-                    (singleTicket) => Container(
-                      margin: EdgeInsets.only(bottom: 20),
-                      child: TicketView(
-                        ticket: singleTicket,
-                        wholeScreen: true,
+                    (singleTicket) => GestureDetector(
+                      onTap:(){
+                        var index = ticketList.indexOf(singleTicket);
+                        Navigator.pushNamed(context, "ticket_screen", arguments: {
+                          "index": index
+                        });
+
+                      } ,
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: 20),
+                        child: TicketView(
+                          ticket: singleTicket,
+                          wholeScreen: true,
+                        ),
                       ),
                     ),
                   )

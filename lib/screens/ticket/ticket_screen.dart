@@ -11,26 +11,46 @@ import 'package:ticket_app/screens/ticket/widgets/ticket_positioned_circle.dart'
 import '../../base/res/widgets/app_column_text_layout.dart';
 import '../search/widgets/app_ticket_tabs.dart';
 
-class TicketScreen extends StatelessWidget {
+class TicketScreen extends StatefulWidget {
   const TicketScreen({super.key});
+
+  @override
+  State<TicketScreen> createState() => _TicketScreenState();
+}
+
+class _TicketScreenState extends State<TicketScreen> {
+
+  late int ticketIndex = 0;
+
+  @override
+  void didChangeDependencies() {
+    var args = ModalRoute.of(context)!.settings.arguments as Map ;
+    // print ("${args["index"]}");
+    ticketIndex = args["index"];
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppStyles.bgColor,
+      appBar: AppBar(
+        title: Text("Tickets"),
+        backgroundColor: AppStyles.bgColor,
+      ),
       body: Stack(
         children: [
           ListView(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             children: [
-              SizedBox(height: 40),
-              Text("Tickets", style: AppStyles.headlineStyle1),
-              const SizedBox(height: 20),
+              // SizedBox(height: 40),
+              // Text("Tickets", style: AppStyles.headlineStyle1),
+              // const SizedBox(height: 20),
               AppTicketTabs(firstTab: "Upcoming", secondTab: "previous"),
               const SizedBox(height: 20),
               Container(
                 padding: EdgeInsets.only(left: 16),
-                child: TicketView(ticket: ticketList[0], isColor: true),
+                child: TicketView(ticket: ticketList[ticketIndex], isColor: true),
               ),
               SizedBox(height: 1),
               Container(
@@ -148,7 +168,7 @@ class TicketScreen extends StatelessWidget {
               SizedBox(height: 20),
               Container(
                 padding: EdgeInsets.only(left: 16),
-                child: TicketView(ticket: ticketList[0]),
+                child: TicketView(ticket: ticketList[ticketIndex]),
               ),
             ],
           ),
