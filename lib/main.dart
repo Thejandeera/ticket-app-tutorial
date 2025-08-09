@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app/screens/all_tickets.dart';
+import 'package:ticket_app/screens/home/all_hotels.dart';
 import 'package:ticket_app/screens/ticket/ticket_screen.dart';
 
 import 'base/bottom_nav_bar.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "all_tickets": (context) => const AllTickets(),
         "ticket_screen": (context) => const TicketScreen(),
+        "all_hotels": (context) => const AllHotels(),
       },
 
     );
