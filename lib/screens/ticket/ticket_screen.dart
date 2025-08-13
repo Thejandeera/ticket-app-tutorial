@@ -19,14 +19,16 @@ class TicketScreen extends StatefulWidget {
 }
 
 class _TicketScreenState extends State<TicketScreen> {
-
   late int ticketIndex = 0;
 
   @override
   void didChangeDependencies() {
-    var args = ModalRoute.of(context)!.settings.arguments as Map ;
-    // print ("${args["index"]}");
-    ticketIndex = args["index"];
+    if (ModalRoute.of(context)!.settings.arguments != null) {
+      var args = ModalRoute.of(context)!.settings.arguments as Map;
+      print("${args["index"]}");
+      ticketIndex = args["index"];
+    }
+
     super.didChangeDependencies();
   }
 
@@ -50,7 +52,10 @@ class _TicketScreenState extends State<TicketScreen> {
               const SizedBox(height: 20),
               Container(
                 padding: EdgeInsets.only(left: 16),
-                child: TicketView(ticket: ticketList[ticketIndex], isColor: true),
+                child: TicketView(
+                  ticket: ticketList[ticketIndex],
+                  isColor: true,
+                ),
               ),
               SizedBox(height: 1),
               Container(
@@ -172,8 +177,8 @@ class _TicketScreenState extends State<TicketScreen> {
               ),
             ],
           ),
-          TicketPositionedCircle(pos: true,),
-          TicketPositionedCircle(pos: null,),
+          TicketPositionedCircle(pos: true),
+          TicketPositionedCircle(pos: null),
         ],
       ),
     );
